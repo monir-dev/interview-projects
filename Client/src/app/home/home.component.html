@@ -1,0 +1,58 @@
+<div class="container-fluid" style="margin-bottom: 3em;margin-top: 3em;">
+  <a [routerLink]="['/create']" class="btn btn-primary" id="addButton"><i class="fa fa-plus"></i> Add</a>
+</div>
+
+
+<div class="container-fluid">
+    <table class='table table-boreded table-striped'>
+        <thead>
+          <th>Action</th>
+          <th>Syllabus</th>
+          <th>Trade</th>
+          <th>Level</th>
+          <th>Uploaded Syllabus</th>
+          <th>Uploaded Test Plan</th>
+          <th>Languages</th>
+          <th>Last Modified By</th>
+          <th>Last Modified Date</th>
+          <th>Active Date</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of syllabuses">
+              <td><a [routerLink]="['/edit', item.id]"><i class="fa fa-edit"></i></a></td>
+              <td>{{ item.syllabusName }}</td>
+              <td>{{ item.tradeId }}</td>
+              <td>{{ item.levelId }}</td>
+              <td><a href="{{baseUrl + item.uploadedSyllabus}}">{{ item.uploadedSyllabus.split('\\')[item.uploadedSyllabus.split('\\').length - 1] }}</a></td>
+              <td><a href="{{baseUrl + item.uploadedTestPlan}}">{{ item.uploadedTestPlan.split('\\')[item.uploadedTestPlan.split('\\').length - 1] }}</a></td>
+              <td>{{ item.languages }}</td>
+              <td>{{ item.developmentOfficer }}</td>
+              <td>{{ item.lastModifiedDate }}</td>
+              <td>{{ item.activeDate }}</td>
+              <td><button class="btn btn-{{ item.status == 'active' ? 'success' : 'danger' }}">{{ item.status }}</button></td>
+            </tr>
+        </tbody>
+      </table>
+</div>
+
+
+<!-- <div class="modal fade" [style.display]="showModal ? 'block' : 'none'" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->

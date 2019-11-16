@@ -1,0 +1,87 @@
+<div class="container" style="margin-top: 3em;">
+
+  <div style="display: inline-flex;">
+      <h1>Create Page &nbsp;&nbsp;</h1><a [routerLink]="['/']" style="margin: 1em 0;"><i class="fa fa-arrow-left"></i> back</a>
+  </div>
+
+
+  <br>
+
+  <form id="addNewItem" name="addNewItem" #formData="ngForm" (ngSubmit)="addNewItem()" enctype="multipart/form-data">
+    <div class="form-row">
+        <div class="col-md-9">
+          <div class="row">
+              <div class="col-md-8">
+                  <label for="tradeId">Trade</label>
+                  <select name="tradeId" id="tradeId" class="form-control {{ errors.TradeId ? 'is-invalid' : ''}}" [(ngModel)]="item.tradeId" (change)="tradeOnChange($event)">
+                    <option value="0" selected>please select</option>
+                    <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
+                  </select>
+                  <div *ngIf="errors.TradeId" class="invalid-feedback">{{ errors.TradeId }}</div>
+              </div>
+              <div class="col-md-4">
+                  <label for="levelId">Level</label>
+                  <select name="levelId" id="levelId" class="form-control {{ errors.LevelId ? 'is-invalid' : ''}}"  [(ngModel)]="item.levelId">
+                      <option value="0" selected>please select</option>
+                      <option *ngFor="let level of levels"  value="{{ level.id }}">{{ level.name }}</option>
+                    </select>
+                    <div *ngIf="errors.LevelId" class="invalid-feedback">{{ errors.LevelId }}</div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12" style="margin-top: 1em;">
+                  <label for="syllabusName">Syllabus Name</label>
+                  <input  type="text" class="form-control {{ errors.SyllabusName ? 'is-invalid' : ''}}" id="syllabusName" name="syllabusName"  required  [(ngModel)]="item.syllabusName">
+                  <div *ngIf="errors.SyllabusName" class="invalid-feedback">{{ errors.SyllabusName }}</div>
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1em;">
+                  <app-upload (onUploadFinished)="syllabusUploadFinished($event)" [uploaderName]="syllabusUploaderName"></app-upload>
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1em;">
+                  <app-upload (onUploadFinished)="testPlanUploadFinished($event)" [uploaderName]="testPlanUploaderName"></app-upload>
+              </div>
+
+              <div class="col-md-6" style="margin-top: 1em;">
+                  <label for="developmentOfficer">Development Officer</label>
+                  <input type="text" id="developmentOfficer" name="developmentOfficer" class="form-control {{ errors.DevelopmentOfficer ? 'is-invalid' : ''}}"  required  [(ngModel)]="item.developmentOfficer">
+                  <div *ngIf="errors.DevelopmentOfficer" class="invalid-feedback">{{ errors.DevelopmentOfficer }}</div>
+              </div>
+
+              <div class="col-md-6" style="margin-top: 1em;">
+                  <label for="manager">Manager</label>
+                  <input type="text" id="manager" name="manager" class="form-control {{ errors.Manager ? 'is-invalid' : ''}}" required  [(ngModel)]="item.manager">
+                  <div *ngIf="errors.Manager" class="invalid-feedback">{{ errors.Manager }}</div>
+              </div>
+
+              <div class="col-md-6" style="margin-top: 1em;">
+                  <label for="activeDate">Active Date</label>
+                  <input type="date" id="activeDate" name="activeDate" class="form-control" required  [(ngModel)]="item.activeDate">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <label for="" style="margin-top: 1.8em;margin-left: 1em;">Languages</label>
+            <div class="form-check" style="margin-left: 1em;">
+                <input class="form-check-input" type="checkbox" value="" id="english"  name="english" [(ngModel)]="item.english">
+                <label class="form-check-label" for="english">
+                  English
+                </label>
+            </div>
+            <div class="form-check" style="margin-left: 1em;">
+                  <input class="form-check-input" type="checkbox" value="" id="chinese" name="chinese"   [(ngModel)]="item.chinese">
+                  <label class="form-check-label" for="chinese">
+                      Chinese
+                  </label>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <button class="btn btn-primary" type="submit">Submit form</button>
+    <button class="btn btn-secondary" id="clearButton" type="button" style="margin-left: 1em;" (onclick)="clear()">Clear</button>
+  </form>
+
+</div>
