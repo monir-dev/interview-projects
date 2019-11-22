@@ -5,3 +5,25 @@
 </div>
 
 
+{{ message$ | async}}
+
+<br>
+
+<button (click)="spanishMessage()" class="btn btn-primary ml-2">Spanish</button>
+<button (click)="frenchMessage()" class="btn btn-warning ml-2">French</button>
+
+
+<div *ngIf="post | async as p">
+
+  <h2>{{ p.text }}</h2>
+  <h4>Votes: {{ p.likes }}</h4>
+
+  <button (click)="upvote()" class="btn btn-success btn-sm ml-2">Upvote</button>
+  <button (click)="downvote()" class="btn btn-danger btn-sm ml-2">Downvote</button>
+  <button (click)="resetText()" class="btn btn-warning btn-sm ml-2">Reset</button>
+
+
+  <input [(ngModel)]="text" class="ml-2 mt-2 form-control col-md-4">
+  <button (click)="editText()" class="btn btn-primary btn-sm ml-2">Change Title</button>
+
+</div>

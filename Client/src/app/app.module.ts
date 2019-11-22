@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { StoreModule } from '@ngrx/store';
+import { SimpleReducer } from "./_reducers/simple.reducer";
+import { postReducer } from './_reducers/post.reducer';
+
+
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
@@ -14,9 +19,10 @@ import { DataService } from './_services/data.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { UpdateComponent } from './update/update.component';
+import { from } from 'rxjs';
 
 
-
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 @NgModule({
    declarations: [
@@ -35,7 +41,14 @@ import { UpdateComponent } from './update/update.component';
         { path: '', component: HomeComponent },
         { path: 'create', component: CreateComponent },
         { path: 'edit/:id', component: UpdateComponent },
-      ])
+      ]),
+      StoreModule.forRoot({
+        post: postReducer,
+        message: SimpleReducer
+       }),
+       StoreDevtoolsModule.instrument({
+         maxAge: 100
+       })
    ],
    providers: [
       DataService,
@@ -46,3 +59,10 @@ import { UpdateComponent } from './update/update.component';
    ]
 })
 export class AppModule { }
+
+
+// RouterModule.forRoot([
+//   { path: '', component: HomeComponent },
+//   { path: 'create', component: CreateComponent },
+//   { path: 'edit/:id', component: UpdateComponent },
+// ])
